@@ -1,0 +1,103 @@
+:host { display: block; }
+
+.caps { padding-top: var(--section-gap); }
+
+.caps-head { padding-bottom: 0; }
+
+// ─── Bühne ───
+// Default: vertikaler Stack (mobil, Reduced Motion, ohne JS).
+// .is-horizontal wird nur von der Desktop-Choreografie gesetzt.
+.caps-stage {
+  position: relative;
+  padding: 3rem var(--pad-x);
+}
+
+.caps-track {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.caps-stage.is-horizontal {
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding: 0 0 0 var(--pad-x);
+
+  .caps-track {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 3vw;
+    padding-right: 40vw; // Auslauf, damit das letzte Panel frei steht
+    will-change: transform;
+  }
+
+  .cap-panel {
+    flex: 0 0 auto;
+    width: min(64vw, 780px);
+    min-height: 58vh;
+  }
+}
+
+// ─── Panels ───
+.cap-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.4rem;
+  overflow: hidden;
+}
+
+.cap-num {
+  position: absolute;
+  top: -1.5rem;
+  right: 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 16vw, 15rem);
+  font-weight: 700;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--line-strong);
+  pointer-events: none;
+}
+
+.cap-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+}
+
+.cap-blurb {
+  color: var(--muted);
+  max-width: 30rem;
+  margin: 0 0 1.8rem;
+}
+
+.cap-skills {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0;
+  padding: 0;
+}
+
+// ─── Fortschritt ───
+.caps-progress {
+  position: absolute;
+  bottom: 2.2rem;
+  right: var(--pad-x);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--faint);
+  display: none;
+}
+
+.caps-current { color: var(--cyan); margin-right: 0.5rem; }
+
+.caps-stage.is-horizontal .caps-progress { display: block; }

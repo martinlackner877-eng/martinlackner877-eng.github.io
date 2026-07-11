@@ -1,0 +1,114 @@
+import {
+  Component, ChangeDetectionStrategy, AfterViewInit, OnDestroy,
+  ElementRef, NgZone, inject, viewChild, effect, signal
+} from '@angular/core';
+import { gsap } from 'gsap';
+import { SplitText } from 'gsap/SplitText';
+import { MotionService, SCRAMBLE_CHARS } from '../../../core/motion.service';
+import { HERO_KICKER } from '../../../data/portfolio.data';
+import { NeuralCanvas } from '../../../shared/components/neural-canvas';
+
+/**
+ * Kapitel 00 — „Signal": Neural-Canvas hinter riesiger Typo.
+ * Intro startet, sobald der Preloader fertig ist (introDone).
+ * Beim Scrollen bleibt der Hero gepinnt, die Headline driftet
+ * auseinander und das Partikelnetz verdichtet sich zur Mitte.
+ */
+@Component({
+  selector: 'app-hero-section',
+  imports: [NeuralCanvas],
+  templateUrl: './hero.html',
+  styleUrl: './hero.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class HeroSection implements AfterViewInit, OnDestroy {
+  private host = inject(ElementRef<HTMLElement>);
+  private ngZone = inject(NgZone);
+  private motion = inject(MotionService);
+  private ctx?: gsap.Context;
+
+  readonly kicker = HERO_KICKER;
+  readonly canvasRef = viewChild(NeuralCanvas);
+
+  private readonly setupDone = signal(false);
+  private intro?: gsap.core.Timeline;
+  private introPlayed = false;
+  private destroyed = false;
+
+  constructor() {
+    effect(() => {
+      if (this.motion.introDone() && this.setupDone() && !this.introPlayed) {
+        this.introPlayed = true;
+        this.ngZone.runOutsideAngular(() => this.intro?.play());
+      }
+    });
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.motion.isBrowser || this.motion.reducedMotion) return;
+
+    this.ngZone.runOutsideAngular(() => {
+      document.fonts.ready.then(() => {
+        if (this.destroyed) return;
+        this.ctx = gsap.context(() => this.setup(), this.host.nativeElement);
+        this.setupDone.set(true);
+      });
+    });
+  }
+
+  private setup(): void {
+    const split = SplitText.create('.hero-line-inner', {
+      type: 'chars',
+      mask: 'chars',
+      charsClass: 'tr-char'
+    });
+
+    // Startzustände — der Preloader verdeckt die Bühne noch
+    gsap.set(split.chars, { yPercent: 120 });
+    gsap.set('.hero-kicker, .hero-role, .hero-sub, .hero-cue', { opacity: 0 });
+
+    // ─── Auftritt ───
+    this.intro = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } })
+      .to(split.chars, { yPercent: 0, duration: 1.15, stagger: 0.035 }, 0.15)
+      .to('.hero-kicker', {
+        opacity: 1, duration: 0.9,
+        scrambleText: { text: '{original}', chars: SCRAMBLE_CHARS, speed: 0.6 }
+      }, 0.5)
+      .to('.hero-role', {
+        opacity: 1, duration: 0.8,
+        scrambleText: { text: '{original}', chars: SCRAMBLE_CHARS, speed: 0.5 }
+      }, 0.8)
+      .to('.hero-sub', { opacity: 1, y: 0, duration: 0.9 }, 1.05)
+      .to('.hero-cue', { opacity: 1, duration: 0.8 }, 1.4);
+    gsap.set('.hero-sub', { y: 22 });
+
+    // ─── Gepinnter Abgang ───
+    const canvas = this.canvasRef();
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: '.hero',
+        start: 'top top',
+        end: '+=85%',
+        pin: true,
+        scrub: 0.6,
+        onUpdate: (self) => {
+          if (canvas) canvas.condense = self.progress;
+        }
+      }
+    })
+      .to('.hero-line-a', { xPercent: -14, opacity: 0, ease: 'power1.in' }, 0)
+      .to('.hero-line-b', { xPercent: 14, opacity: 0, ease: 'power1.in' }, 0)
+      .to('.hero-kicker, .hero-role, .hero-sub, .hero-cue', { opacity: 0, y: -30, ease: 'power1.in' }, 0)
+      .to('.hero-shade', { opacity: 0.85, ease: 'none' }, 0);
+  }
+
+  onCue(event: Event): void {
+    event.preventDefault();
+    this.motion.scrollTo('#band');
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed = true;
+    this.ctx?.revert();
+  }
+}

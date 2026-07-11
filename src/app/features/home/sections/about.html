@@ -1,0 +1,35 @@
+<section class="section about" id="about" data-chapter="01 / WER">
+  <div class="nebula nebula-violet about-nebula" aria-hidden="true"></div>
+
+  <p class="kicker" appScramble>01 / Wer</p>
+  <h2 class="section-title" appTextReveal>Vier Disziplinen, <em>eine</em> Handschrift.</h2>
+
+  <div class="about-pin">
+    @for (p of about; track $index) {
+      <p class="about-p">{{ p }}</p>
+    }
+  </div>
+
+  <!-- Cinematic Break: Wafer — die Welt, in der die Security-Arbeit spielt -->
+  <figure class="about-break" data-reveal>
+    <img
+      src="img/wafer.jpg"
+      alt="Nahaufnahme eines Halbleiter-Wafers an einem Roboterarm"
+      loading="lazy"
+      decoding="async"
+      data-speed="0.9"
+    />
+    <figcaption class="about-break-caption" appScramble>Halbleiterfertigung · mein Arbeitsumfeld</figcaption>
+  </figure>
+
+  <div class="stats" data-reveal>
+    @for (s of stats; track s.label) {
+      <div class="stat">
+        <div class="stat-number">
+          <span class="stat-value" [attr.data-value]="s.value">0</span><span class="stat-suffix">{{ s.suffix }}</span>
+        </div>
+        <div class="stat-label">{{ s.label }}</div>
+      </div>
+    }
+  </div>
+</section>

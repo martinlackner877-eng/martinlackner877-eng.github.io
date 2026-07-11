@@ -1,0 +1,28 @@
+<section class="caps" data-chapter="02 / WAS">
+  <div class="section caps-head">
+    <p class="kicker" appScramble>02 / Was</p>
+    <h2 class="section-title" appTextReveal>Was ich <em>kann</em>.</h2>
+  </div>
+
+  <div class="caps-stage">
+    <div class="caps-track">
+      @for (g of skillGroups; track g.num) {
+        <article class="cap-panel panel">
+          <span class="cap-num" aria-hidden="true">{{ g.num }}</span>
+          <div class="cap-body">
+            <h3 class="cap-title">{{ g.title }}</h3>
+            <p class="cap-blurb">{{ g.blurb }}</p>
+            <ul class="cap-skills">
+              @for (s of g.skills; track s) {
+                <li class="chip">{{ s }}</li>
+              }
+            </ul>
+          </div>
+        </article>
+      }
+    </div>
+    <div class="caps-progress" aria-hidden="true">
+      <span class="caps-current">01</span><span class="caps-total">— 04</span>
+    </div>
+  </div>
+</section>

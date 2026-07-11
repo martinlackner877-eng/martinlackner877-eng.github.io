@@ -1,0 +1,88 @@
+<section class="section work" id="work" data-chapter="03 / BEWEIS">
+  <div class="nebula nebula-cyan work-nebula" aria-hidden="true"></div>
+
+  <p class="kicker" appScramble>03 / Beweis</p>
+  <h2 class="section-title" appTextReveal>Projekte, die <em>leben</em>.</h2>
+
+  @for (p of projects; track p.slug) {
+    <article class="work-case panel" appTilt data-reveal>
+      <button
+        class="work-visual"
+        type="button"
+        [attr.data-cursor]="p.case ? 'View' : null"
+        [disabled]="!p.case"
+        (click)="openCase(p)"
+        [attr.aria-label]="p.case ? 'Case Study öffnen: ' + p.name : p.name"
+      >
+        @if (p.image) {
+          <img class="work-visual-img" [src]="p.image" alt="" loading="lazy" decoding="async" data-speed="0.95" />
+          <span class="work-visual-shade" aria-hidden="true"></span>
+        }
+        <span class="work-visual-name" data-speed="0.92" aria-hidden="true">{{ p.name }}</span>
+        <span class="work-visual-year" data-speed="1.08" aria-hidden="true">{{ p.meta }}</span>
+        <span class="work-visual-grid" aria-hidden="true"></span>
+      </button>
+
+      <div class="work-body">
+        <div class="work-head">
+          <h3 class="work-name">{{ p.name }}</h3>
+          <span class="work-meta">{{ p.meta }}</span>
+        </div>
+        <p class="work-desc">{{ p.description }}</p>
+        <ul class="work-tags">
+          @for (t of p.tags; track t) {
+            <li class="chip">{{ t }}</li>
+          }
+        </ul>
+        @if (p.case || p.url) {
+          <div class="work-links">
+            @if (p.case) {
+              <button class="work-cta" type="button" appMagnetic (click)="openCase(p)">
+                Case ansehen <span aria-hidden="true">→</span>
+              </button>
+            }
+            @if (p.url) {
+              <a class="work-live" [href]="p.url" target="_blank" rel="noopener">
+                {{ p.urlLabel }} <span aria-hidden="true">↗</span>
+              </a>
+            }
+          </div>
+        }
+      </div>
+    </article>
+  }
+
+  <!-- Weitere Systeme: kompakte Zeilen statt großer Karten -->
+  <div class="work-more">
+    <h3 class="work-more-title" appScramble>Weitere Systeme</h3>
+    <ul class="work-more-list">
+      @for (m of moreProjects; track m.name) {
+        <li class="work-more-item" data-reveal>
+          <span class="work-more-thumb" aria-hidden="true">
+            @if (m.image) {
+              <img [src]="m.image" alt="" loading="lazy" decoding="async" />
+            }
+          </span>
+          <span class="work-more-name">{{ m.name }}</span>
+          <span class="work-more-desc">{{ m.description }}</span>
+          <ul class="work-more-tags">
+            @for (t of m.tags; track t) {
+              <li class="chip">{{ t }}</li>
+            }
+          </ul>
+        </li>
+      }
+    </ul>
+  </div>
+
+  <article class="work-next panel" data-reveal>
+    <div class="work-head">
+      <h3 class="work-name">Das nächste Projekt</h3>
+      <span class="work-meta">in Arbeit</span>
+    </div>
+    <p class="work-desc">
+      Hier entsteht Platz für das, was als Nächstes kommt. Vielleicht deins?
+    </p>
+    <a class="work-live" href="#contact" (click)="goContact($event)">Projekt anfragen <span aria-hidden="true">→</span></a>
+  </article>
+</section>

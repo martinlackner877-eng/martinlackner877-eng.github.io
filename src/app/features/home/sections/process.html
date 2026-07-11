@@ -1,0 +1,16 @@
+<section class="section process" data-chapter="04 / WIE">
+  <p class="kicker" appScramble>04 / Wie</p>
+  <h2 class="section-title" appTextReveal>Vom Briefing zum <em>Launch</em>.</h2>
+
+  <div class="process-stack">
+    @for (st of steps; track st.num) {
+      <article class="step-card panel">
+        <span class="step-num" aria-hidden="true">{{ st.num }}</span>
+        <div class="step-body">
+          <h3 class="step-title">{{ st.title }}</h3>
+          <p class="step-text">{{ st.text }}</p>
+        </div>
+      </article>
+    }
+  </div>
+</section>

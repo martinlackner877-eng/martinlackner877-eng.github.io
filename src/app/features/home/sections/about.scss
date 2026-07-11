@@ -1,0 +1,96 @@
+:host { display: block; }
+
+.about { padding-top: var(--section-gap); }
+
+.about-nebula {
+  width: 44rem;
+  height: 30rem;
+  top: -8rem;
+  right: -14rem;
+}
+
+.about-pin {
+  max-width: 46rem;
+  padding: 3rem 0;
+}
+
+.about-p {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.6vw, 2rem);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  margin: 0 0 1.8em;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+// ─── Cinematic Break: Wafer ───
+.about-break {
+  position: relative;
+  margin: 4rem 0 0;
+  height: clamp(16rem, 46vh, 30rem);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 130%; // Überhöhung als Spielraum für den data-speed-Parallax
+    margin-top: -15%;
+    object-fit: cover;
+    will-change: transform;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(5, 5, 8, 0.65), transparent 45%);
+    pointer-events: none;
+  }
+}
+
+.about-break-caption {
+  position: absolute;
+  left: 1.4rem;
+  bottom: 1.1rem;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+// ─── Kennzahlen ───
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 5rem;
+  border-top: 1px solid var(--line);
+  padding-top: 3rem;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5vw, 4rem);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.stat-suffix { color: var(--cyan); }
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 0.7rem;
+}

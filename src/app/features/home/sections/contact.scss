@@ -1,0 +1,77 @@
+:host { display: block; }
+
+.contact {
+  padding-top: var(--section-gap);
+  padding-bottom: calc(var(--section-gap) / 1.4);
+  text-align: center;
+}
+
+.contact-nebula {
+  width: 50rem;
+  height: 34rem;
+  bottom: -10rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.contact-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 8vw, 7rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  margin: 0 0 2rem;
+
+  em {
+    font-style: normal;
+    color: transparent;
+    background: linear-gradient(120deg, var(--violet), var(--cyan));
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+}
+
+.contact-sub {
+  color: var(--muted);
+  max-width: 30rem;
+  margin: 0 auto 3.4rem;
+}
+
+.contact-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.6rem;
+  flex-wrap: wrap;
+}
+
+.contact-pill {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.6vw, 1.7rem);
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 1.3rem 3rem;
+  transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+
+  &:hover {
+    border-color: var(--cyan);
+    box-shadow: 0 0 32px var(--cyan-glow);
+  }
+}
+
+.contact-pill-ghost {
+  color: var(--muted);
+
+  &:hover {
+    color: var(--text);
+    border-color: var(--violet);
+    box-shadow: 0 0 32px var(--violet-glow);
+  }
+}
+
+.contact-band {
+  margin-top: 2rem;
+}

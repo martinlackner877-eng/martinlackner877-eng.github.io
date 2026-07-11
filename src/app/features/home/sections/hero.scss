@@ -1,0 +1,118 @@
+:host { display: block; }
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+// Vignette über dem Canvas, verdichtet sich beim Abgang
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120rem 60rem at 50% 120%, var(--violet-soft), transparent 55%),
+    radial-gradient(ellipse at center, transparent 30%, var(--bg) 95%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  padding: 0 var(--pad-x);
+  max-width: 90rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin: 0 0 2rem;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: -0.03em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.hero-line {
+  display: block;
+  will-change: transform, opacity;
+}
+
+.hero-line-inner { display: inline-block; }
+
+.hero-title em {
+  font-style: normal;
+  color: transparent;
+  background: linear-gradient(120deg, var(--violet), var(--cyan));
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.hero-role {
+  font-family: var(--font-mono);
+  font-size: clamp(0.8rem, 1.6vw, 1.05rem);
+  letter-spacing: 0.42em;
+  color: var(--muted);
+  margin: 2.2rem 0 0;
+
+  i {
+    font-style: normal;
+    color: var(--violet);
+  }
+}
+
+.hero-sub {
+  max-width: 34rem;
+  color: var(--muted);
+  font-size: 1.02rem;
+  margin: 2rem 0 0;
+}
+
+.hero-cue {
+  position: absolute;
+  right: var(--pad-x);
+  bottom: 3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--faint);
+  text-decoration: none;
+  transition: color 0.3s var(--ease);
+
+  &:hover { color: var(--cyan); }
+}
+
+.cue-line {
+  width: 3.4rem;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan-glow));
+  animation: cue-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes cue-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+@media (max-width: 700px) {
+  .hero-cue { display: none; }
+}

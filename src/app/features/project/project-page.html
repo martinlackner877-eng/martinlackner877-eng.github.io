@@ -1,0 +1,59 @@
+@if (project; as p) {
+  <article class="case">
+
+    <!-- ═══ CASE-HERO ═══ -->
+    <header class="section case-hero">
+      <div class="nebula nebula-violet case-nebula" aria-hidden="true"></div>
+
+      <button class="case-back" type="button" appMagnetic (click)="back()">
+        <span aria-hidden="true">←</span> Zurück zur Story
+      </button>
+
+      <p class="kicker" appScramble>Case Study</p>
+      <h1 class="case-title" appTextReveal="chars">{{ p.name }}</h1>
+      <p class="case-intro" appTextReveal="lines" [revealDelay]="0.3">{{ p.case!.intro }}</p>
+
+      <dl class="case-facts" data-reveal>
+        @for (f of p.case!.facts; track f.label) {
+          <div class="case-fact">
+            <dt appScramble>{{ f.label }}</dt>
+            <dd>{{ f.value }}</dd>
+          </div>
+        }
+      </dl>
+    </header>
+
+    <!-- ═══ ERZÄHLUNG ═══ -->
+    @for (s of p.case!.sections; track s.kicker) {
+      <section class="section case-section">
+        <p class="kicker" appScramble>{{ s.kicker }}</p>
+        <h2 class="case-section-title" appTextReveal>{{ s.title }}</h2>
+        <div class="case-copy">
+          @for (par of s.paragraphs; track $index) {
+            <p data-reveal>{{ par }}</p>
+          }
+        </div>
+        @if (s.quote) {
+          <blockquote class="case-quote" appTextReveal="words">
+            „{{ s.quote }}"
+          </blockquote>
+        }
+      </section>
+    }
+
+    <!-- ═══ ABSPANN ═══ -->
+    <footer class="section case-outro">
+      <div class="case-outro-actions" data-reveal>
+        @if (p.url) {
+          <a class="case-live" [href]="p.url" target="_blank" rel="noopener">
+            Live ansehen: {{ p.urlLabel }} <span aria-hidden="true">↗</span>
+          </a>
+        }
+        <button class="case-back-big" type="button" appMagnetic (click)="back()">
+          <span aria-hidden="true">←</span> Alle Projekte
+        </button>
+      </div>
+    </footer>
+
+  </article>
+}

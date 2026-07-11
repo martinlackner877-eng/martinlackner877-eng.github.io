@@ -1,33 +1,43 @@
 // ============================================================
-// MARTIN LACKNER — PORTFOLIO
-// Direction: "Obsidian" — Cinematic Dark
-//   - Tiefes Schwarz mit kaltem Blaustich, warmes Champagner-Gold
-//     als einziges Licht. Große, ruhige Serif-Typografie (Fraunces).
-//   - Motion = Inszenierung, nie Dekoration.
-// Diese Datei ist die EINE Quelle der Wahrheit für Farbe & Typo.
+// MARTIN LACKNER — PORTFOLIO v2
+// Direction: "NEURAL VOID"
+//   - Deep-Space-Dunkel, Elektrik-Violett + Cyan als Signal-
+//     farben. Große Grotesk-Typografie (Space Grotesk), Mono-
+//     Labels (JetBrains Mono). Glas-Panels, Glow, Partikel.
+//   - Motion = Erzählung: Scroll ist die Timeline der Story.
+// Diese Datei ist die EINE Quelle der Wahrheit für Tokens.
 // ============================================================
 
 :root {
   // ─── Farben ───
-  --bg:          #06060a;                        // Obsidian — fast schwarz, kalter Stich
-  --bg-2:        #0b0b12;                        // erhöhte Sektion
-  --surface:     #101018;                        // Karten / Panels
-  --line:        rgba(232, 228, 217, 0.09);      // warm getönte Hairline
-  --text:        #f0eee6;                        // Elfenbein — warmes Weiß
-  --muted:       #98979f;                        // gedämpftes Grau
-  --faint:       #56555f;
-  --accent:      #dfa752;                        // Champagner-Gold — das "Licht"
-  --accent-soft: rgba(223, 167, 82, 0.12);
-  --accent-glow: rgba(223, 167, 82, 0.35);
+  --bg:           #050508;                        // Void — fast schwarz, violetter Stich
+  --bg-2:         #0a0a12;                        // erhöhte Sektion
+  --surface:      #0d0d17;                        // Karten / Panels
+  --glass:        rgba(124, 108, 255, 0.05);      // Glas-Fläche
+  --line:         rgba(163, 155, 255, 0.10);      // Hairline
+  --line-strong:  rgba(163, 155, 255, 0.24);
+  --text:         #ecebff;                        // kühles Weiß mit Violett-Hauch
+  --muted:        #8f8ca6;
+  --faint:        #4a4860;
+  --violet:       #7c6cff;                        // Elektrik-Violett — Primärsignal
+  --cyan:         #4ee1c9;                        // Cyan — Sekundärsignal
+  --violet-soft:  rgba(124, 108, 255, 0.14);
+  --violet-glow:  rgba(124, 108, 255, 0.38);
+  --cyan-soft:    rgba(78, 225, 201, 0.12);
+  --cyan-glow:    rgba(78, 225, 201, 0.35);
 
   // ─── Typografie ───
-  --font-display: 'Fraunces', Georgia, serif;
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
   --font-body:    'Inter', -apple-system, sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, monospace;
 
+  --fs-hero:  clamp(3rem, 10vw, 9.5rem);
+  --fs-h2:    clamp(2.1rem, 5.4vw, 4.6rem);
+  --fs-h3:    clamp(1.3rem, 2.4vw, 1.9rem);
+
   // ─── Rhythmus ───
   --pad-x: clamp(1.4rem, 5vw, 6rem);
-  --section-gap: clamp(7rem, 14vh, 12rem);
+  --section-gap: clamp(7rem, 16vh, 13rem);
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -36,8 +46,11 @@
 *::after { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
-  @media (prefers-reduced-motion: reduce) { scroll-behavior: auto; }
+  // Kein natives smooth-scroll: ScrollSmoother übernimmt die Regie.
+  scroll-behavior: auto;
+  // Muss zusätzlich zu body gesetzt sein: mobile Browser expandieren
+  // sonst den Layout-Viewport um seitlich rausragende Deko.
+  overflow-x: clip;
 }
 
 body {
@@ -49,27 +62,134 @@ body {
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
+  // clip statt hidden: clippt seitlich rausragende Deko (Nebel), ohne
+  // einen Scroll-Container zu erzeugen — sonst expandiert der mobile
+  // Layout-Viewport und fixed-Elemente (Nav) binden sich daran.
+  overflow-x: clip;
+}
+
+// Die gescrollte Bühne selbst darf horizontal nie Overflow beitragen.
+#smooth-content {
+  overflow-x: clip;
 }
 
 ::selection {
-  background: var(--accent);
-  color: #14100a;
+  background: var(--violet);
+  color: #0a0817;
 }
 
 // Dezente, dunkle Scrollbar (Chromium/WebKit)
 ::-webkit-scrollbar { width: 10px; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
-  background: #26262e;
+  background: #232236;
   border-radius: 5px;
-  &:hover { background: #3a3a44; }
+  &:hover { background: #35334f; }
 }
 
 a { color: inherit; }
 
-// Fokus sichtbar, aber im Stil
 :focus-visible {
-  outline: 1px solid var(--accent);
+  outline: 1px solid var(--cyan);
   outline-offset: 3px;
+}
+
+// ============================================================
+// Geteilte Bausteine der Story-Sektionen
+// ============================================================
+
+.section {
+  position: relative;
+  padding: calc(var(--section-gap) / 2) var(--pad-x);
+  max-width: 90rem;
+  margin: 0 auto;
+}
+
+// Kapitel-Marker: „01 / WER" — mono, decodiert sich beim Erreichen
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin: 0 0 1.6rem;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 2.2rem;
+    height: 1px;
+    background: var(--cyan-glow);
+    vertical-align: middle;
+    margin-right: 0.9rem;
+  }
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0 0 3.5rem;
+
+  em {
+    font-style: normal;
+    color: transparent;
+    background: linear-gradient(120deg, var(--violet), var(--cyan));
+    background-clip: text;
+    -webkit-background-clip: text;
+  }
+}
+
+// Glas-Panel
+.panel {
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  backdrop-filter: blur(6px);
+}
+
+// Mono-Chip (Skills, Tags)
+.chip {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.32rem 0.85rem;
+  white-space: nowrap;
+}
+
+// background-clip:text am <em> bricht, sobald SplitText den Inhalt in
+// transformierte Char-Spans zerlegt — die Chars innerhalb von <em>
+// bekommen den Verlauf deshalb einzeln. (Global, weil GSAP die Spans
+// dynamisch erzeugt und Component-Styles sie nicht matchen.)
+em .tr-char {
+  background: linear-gradient(120deg, var(--violet), var(--cyan));
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+// Radialer Hintergrund-Nebel (Violett/Cyan), pro Sektion positionierbar
+.nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: -1;
+
+  &.nebula-violet { background: radial-gradient(circle, var(--violet-soft), transparent 70%); }
+  &.nebula-cyan   { background: radial-gradient(circle, var(--cyan-soft), transparent 70%); }
+}
+
+// Auf Touch-Geräten: nativen Cursor behalten, auf feinen Pointern
+// übernimmt der Custom Cursor (Klasse setzt die Shell).
+body.has-custom-cursor,
+body.has-custom-cursor a,
+body.has-custom-cursor button {
+  cursor: none;
 }

@@ -1,0 +1,29 @@
+<section class="section contact" id="contact" data-chapter="06 / KONTAKT">
+  <div class="nebula nebula-violet contact-nebula" aria-hidden="true"></div>
+
+  <p class="kicker" appScramble>06 / Kontakt</p>
+
+  <h2 class="contact-title" appTextReveal="chars">
+    Lass uns <em>reden</em>.
+  </h2>
+
+  <p class="contact-sub" data-reveal>
+    Neues Projekt, Zusammenarbeit oder einfach eine gute Idee —
+    am schnellsten erreichst du mich auf LinkedIn.
+  </p>
+
+  <div class="contact-actions" data-reveal>
+    <a class="contact-pill" appMagnetic [magneticStrength]="0.25"
+       [href]="contact.linkedin" target="_blank" rel="noopener">
+      LinkedIn <span aria-hidden="true">↗</span>
+    </a>
+    <a class="contact-pill contact-pill-ghost" appMagnetic [magneticStrength]="0.25"
+       [href]="contact.github" target="_blank" rel="noopener">
+      GitHub <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+</section>
+
+<div class="contact-band">
+  <app-marquee [items]="availability" [speed]="38" />
+</div>

@@ -1,0 +1,20 @@
+<section class="section tl" data-chapter="05 / WOHER">
+  <p class="kicker" appScramble>05 / Woher</p>
+  <h2 class="section-title" appTextReveal>Der Weg <em>hierher</em>.</h2>
+
+  <ol class="tl-list">
+    <span class="tl-line" aria-hidden="true"><span class="tl-line-fill"></span></span>
+
+    @for (t of timeline; track t.title; let odd = $odd) {
+      <li class="tl-entry" [class.tl-entry-right]="odd">
+        <span class="tl-dot" aria-hidden="true"></span>
+        <div class="tl-body">
+          <span class="tl-period" appScramble>{{ t.period }}</span>
+          <h3 class="tl-title">{{ t.title }}</h3>
+          <span class="tl-place">{{ t.place }}</span>
+          <p class="tl-text">{{ t.text }}</p>
+        </div>
+      </li>
+    }
+  </ol>
+</section>
