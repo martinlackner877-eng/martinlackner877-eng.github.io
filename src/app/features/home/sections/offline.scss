@@ -1,0 +1,68 @@
+:host { display: block; }
+
+.offline { padding-top: var(--section-gap); }
+
+.offline-nebula {
+  width: 42rem;
+  height: 30rem;
+  top: 4rem;
+  right: -16rem;
+}
+
+.offline-intro {
+  color: var(--muted);
+  max-width: 38rem;
+  margin: 0 0 3.5rem;
+}
+
+// Versetzte Galerie: columns statt grid, damit Hoch- und Querformate
+// natürlich fließen; data-lag macht das Schweben.
+.offline-grid {
+  columns: 4;
+  column-gap: 1.1rem;
+
+  @media (max-width: 1100px) { columns: 3; }
+  @media (max-width: 760px) { columns: 2; }
+}
+
+.offline-card {
+  position: relative;
+  margin: 0 0 1.1rem;
+  break-inside: avoid;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-2);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: saturate(0.78) brightness(0.92);
+    transition: filter 0.5s var(--ease), transform 0.5s var(--ease);
+  }
+
+  &:hover img {
+    filter: saturate(1) brightness(1);
+    transform: scale(1.03);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(5, 5, 8, 0.45), transparent 35%);
+    pointer-events: none;
+  }
+}
+
+.offline-num {
+  position: absolute;
+  left: 0.8rem;
+  bottom: 0.6rem;
+  z-index: 1;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  color: var(--muted);
+}

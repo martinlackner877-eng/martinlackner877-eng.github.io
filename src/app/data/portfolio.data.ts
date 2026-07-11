@@ -71,6 +71,32 @@ export const CONTACT = {
   github: 'https://github.com/martinlackner877-eng'
 } as const;
 
+/** Porträt im Kontakt-Kapitel. */
+export const PORTRAIT = 'img/me.jpg';
+
+// ─── Offline (Kapitel 06) ───
+export interface OfflinePhoto {
+  src: string;
+  alt: string;
+}
+
+export const OFFLINE_INTRO =
+  'Radsport, Berge, Snowboard, Reisen — und ehrenamtlich als Sanitäter beim ' +
+  'Österreichischen Roten Kreuz. Sport bedeutet für mich Ausdauer und Disziplin, ' +
+  'das Ehrenamt Verantwortung und klare Entscheidungen unter Zeitdruck. ' +
+  'Beides nehme ich mit in jedes Projekt.';
+
+export const OFFLINE_PHOTOS: OfflinePhoto[] = [
+  { src: 'img/off-mono.jpg', alt: 'Martin Lackner, Schwarz-Weiß-Porträt im Anzug' },
+  { src: 'img/off-rtw-berge.jpg', alt: 'Rettungswagen des Roten Kreuzes in den Bergen' },
+  { src: 'img/off-heli.jpg', alt: 'Hubschrauber im Schnee am Berg' },
+  { src: 'img/off-reise.jpg', alt: 'Auf Reisen, Blick über eine Stadt am Meer' },
+  { src: 'img/off-sunset.jpg', alt: 'Martin Lackner bei Sonnenuntergang am Meer' },
+  { src: 'img/off-rtw-schnee.jpg', alt: 'Rettungswagen im winterlichen Einsatz' },
+  { src: 'img/off-lounge.jpg', alt: 'Martin Lackner am Abend in einer Lounge' },
+  { src: 'img/off-suit.jpg', alt: 'Martin Lackner im Anzug' }
+];
+
 export const HERO_KICKER = 'Martin Lackner · Kärnten, Österreich';
 
 // ─── About ───

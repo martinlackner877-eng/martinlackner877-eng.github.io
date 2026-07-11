@@ -14,6 +14,7 @@ import { CapabilitiesSection } from './sections/capabilities';
 import { WorkSection } from './sections/work';
 import { ProcessSection } from './sections/process';
 import { TimelineSection } from './sections/timeline';
+import { OfflineSection } from './sections/offline';
 import { ContactSection } from './sections/contact';
 
 /**
@@ -24,7 +25,7 @@ import { ContactSection } from './sections/contact';
   selector: 'app-home-page',
   imports: [
     Marquee, HeroSection, AboutSection, CapabilitiesSection,
-    WorkSection, ProcessSection, TimelineSection, ContactSection
+    WorkSection, ProcessSection, TimelineSection, OfflineSection, ContactSection
   ],
   template: `
     <app-hero-section />
@@ -36,6 +37,7 @@ import { ContactSection } from './sections/contact';
     <app-work-section />
     <app-process-section />
     <app-timeline-section />
+    <app-offline-section />
     <app-contact-section />
   `,
   changeDetection: ChangeDetectionStrategy.OnPush

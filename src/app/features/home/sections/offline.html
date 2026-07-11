@@ -1,0 +1,19 @@
+<section class="section offline" data-chapter="06 / OFFLINE">
+  <div class="nebula nebula-cyan offline-nebula" aria-hidden="true"></div>
+
+  <p class="kicker" appScramble>06 / Offline</p>
+  <h2 class="section-title" appTextReveal>Abseits des <em>Codes</em>.</h2>
+
+  <p class="offline-intro" data-reveal>{{ intro }}</p>
+
+  <div class="offline-grid">
+    @for (photo of photos; track photo.src; let i = $index) {
+      <figure class="offline-card" data-reveal [attr.data-lag]="lagFor(i)">
+        <img [src]="photo.src" [alt]="photo.alt" loading="lazy" decoding="async" />
+        <figcaption class="offline-num" aria-hidden="true">
+          {{ (i + 1 < 10 ? '0' : '') + (i + 1) }}
+        </figcaption>
+      </figure>
+    }
+  </div>
+</section>

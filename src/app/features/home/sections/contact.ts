@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { CONTACT } from '../../../data/portfolio.data';
+import { CONTACT, PORTRAIT } from '../../../data/portfolio.data';
 import { Magnetic } from '../../../shared/directives/magnetic.directive';
 import { Scramble } from '../../../shared/directives/scramble.directive';
 import { TextReveal } from '../../../shared/directives/text-reveal.directive';
@@ -19,5 +19,6 @@ import { Marquee } from '../../../shared/components/marquee';
 })
 export class ContactSection {
   readonly contact = CONTACT;
+  readonly portrait = PORTRAIT;
   readonly availability = ['Offen für neue Projekte', 'Security × Code × AI × Design', 'Kärnten · Österreich'];
 }
