@@ -26,7 +26,9 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        # npm install statt npm ci: das unter Windows erzeugte Lockfile
+        # listet Linux-Optional-Deps (@emnapi/*) nicht -> npm ci bricht ab.
+        run: npm install --no-audit --no-fund
 
       - name: Build
         run: npm run build
