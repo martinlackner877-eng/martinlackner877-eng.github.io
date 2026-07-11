@@ -24,19 +24,21 @@
 // über sie hinweg (Text liegt eine Ebene höher = Tiefenwirkung).
 .hero-figure {
   position: absolute;
-  right: clamp(0rem, 5vw, 6rem);
+  // bewusst eingerückt, damit „LACKNER." und der Cyan-Punkt die
+  // Figur überlappen — die Typo liegt eine Ebene darüber (Tiefe).
+  right: clamp(4rem, 13vw, 15rem);
   bottom: 0;
-  height: 76vh;
-  height: 76svh;
-  aspect-ratio: 941 / 1100;
+  height: 90vh;
+  height: 90svh;
+  aspect-ratio: 970 / 1500;
   pointer-events: none;
 
   // Aura hinter der Figur
   &::before {
     content: '';
     position: absolute;
-    inset: -15% -25%;
-    background: radial-gradient(50% 55% at 50% 42%, var(--violet-soft), transparent 70%);
+    inset: -12% -30%;
+    background: radial-gradient(52% 55% at 50% 38%, var(--violet-soft), transparent 72%);
   }
 
   img {
@@ -45,10 +47,10 @@
     height: 100%;
     object-fit: contain;
     object-position: bottom;
-    filter: contrast(1.06) brightness(0.96) drop-shadow(0 0 36px rgba(78, 225, 201, 0.14));
+    filter: drop-shadow(0 0 44px rgba(124, 108, 255, 0.22)) drop-shadow(0 0 14px rgba(78, 225, 201, 0.1));
     // unten weich ins Void auslaufen
-    mask-image: linear-gradient(to top, transparent 0%, black 16%);
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 16%);
+    mask-image: linear-gradient(to top, transparent 0%, black 14%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 14%);
     will-change: transform;
   }
 
