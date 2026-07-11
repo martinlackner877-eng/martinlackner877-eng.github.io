@@ -1,0 +1,196 @@
+<!-- ═══ NAV ═══ -->
+<header class="nav">
+  <a class="nav-logo" href="#top" aria-label="Nach oben">ML<span class="nav-dot">.</span></a>
+  <nav class="nav-links" aria-label="Hauptnavigation">
+    <a href="#work">Projekte</a>
+    <a href="#about">Über mich</a>
+    <a href="#contact" class="nav-cta">Kontakt</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" aria-label="Intro">
+    <div class="hero-vignette" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <p class="hero-kicker">{{ heroKicker }}</p>
+      <h1 class="hero-title">
+        <span class="hero-line">Design &amp;</span>
+        <span class="hero-line"><em>Engineering</em></span>
+        <span class="hero-line">mit Haltung<span class="accent">.</span></span>
+      </h1>
+      <p class="hero-sub">
+        Ich gestalte und baue digitale Systeme — von der visuellen Identität
+        bis zur letzten Zeile Code. Sicher, performant und mit Charakter.
+      </p>
+      <a class="hero-cue" href="#band" aria-label="Weiter scrollen">
+        <span class="cue-line" aria-hidden="true"></span>
+        scroll
+      </a>
+    </div>
+  </section>
+
+  <!-- ═══ KEYWORD-BAND ═══ -->
+  <div class="band" id="band" aria-hidden="true">
+    <div class="band-track">
+      @for (k of keywords; track k) {
+        <span class="band-item">{{ k }}<i class="band-sep">·</i></span>
+      }
+      @for (k of keywords; track $index) {
+        <span class="band-item" aria-hidden="true">{{ k }}<i class="band-sep">·</i></span>
+      }
+    </div>
+  </div>
+
+  <!-- ═══ ABOUT ═══ -->
+  <section class="section about" id="about">
+    <p class="kicker" data-reveal>Über mich</p>
+    <div class="about-grid">
+      <h2 class="about-lead" data-reveal>
+        Vier Disziplinen, <em>eine</em> Handschrift.
+      </h2>
+      <div class="about-copy">
+        @for (p of about; track $index) {
+          <p data-reveal>{{ p }}</p>
+        }
+      </div>
+    </div>
+
+    <div class="stats" data-reveal>
+      @for (s of stats; track s.label) {
+        <div class="stat">
+          <div class="stat-number">
+            <span class="stat-value" [attr.data-value]="s.value">0</span><span class="stat-suffix">{{ s.suffix }}</span>
+          </div>
+          <div class="stat-label">{{ s.label }}</div>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ═══ CAPABILITIES ═══ -->
+  <section class="section caps">
+    <p class="kicker" data-reveal>Capabilities</p>
+    <h2 class="section-title" data-reveal>Was ich <em>kann</em>.</h2>
+
+    <div class="caps-list">
+      @for (g of skillGroups; track g.num) {
+        <article class="cap" data-reveal>
+          <span class="cap-num">{{ g.num }}</span>
+          <div class="cap-body">
+            <h3 class="cap-title">{{ g.title }}</h3>
+            <p class="cap-blurb">{{ g.blurb }}</p>
+            <ul class="cap-skills">
+              @for (s of g.skills; track s) {
+                <li>{{ s }}</li>
+              }
+            </ul>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <!-- ═══ SELECTED WORK ═══ -->
+  <section class="section work" id="work">
+    <p class="kicker" data-reveal>Selected Work</p>
+    <h2 class="section-title" data-reveal>Projekte, die <em>leben</em>.</h2>
+
+    <div class="work-list">
+      @for (p of projects; track p.name) {
+        <article class="project" data-reveal>
+          <div class="project-head">
+            <h3 class="project-name">{{ p.name }}</h3>
+            <span class="project-meta">{{ p.meta }}</span>
+          </div>
+          <p class="project-desc">{{ p.description }}</p>
+          <ul class="project-tags">
+            @for (t of p.tags; track t) {
+              <li>{{ t }}</li>
+            }
+          </ul>
+          @if (p.url) {
+            <a class="project-link" [href]="p.url" target="_blank" rel="noopener">
+              {{ p.urlLabel }} <span aria-hidden="true">↗</span>
+            </a>
+          }
+        </article>
+      }
+
+      <article class="project project-next" data-reveal>
+        <div class="project-head">
+          <h3 class="project-name">Das nächste Projekt</h3>
+          <span class="project-meta">in Arbeit</span>
+        </div>
+        <p class="project-desc">
+          Hier entsteht Platz für das, was als Nächstes kommt.
+          Vielleicht deins?
+        </p>
+        <a class="project-link" href="#contact">Projekt anfragen <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+  </section>
+
+  <!-- ═══ ARBEITSWEISE ═══ -->
+  <section class="section process">
+    <p class="kicker" data-reveal>Arbeitsweise</p>
+    <h2 class="section-title" data-reveal>Vom Briefing zum <em>Launch</em>.</h2>
+
+    <div class="process-grid">
+      @for (st of steps; track st.num) {
+        <article class="step" data-reveal>
+          <span class="step-num">{{ st.num }}</span>
+          <h3 class="step-title">{{ st.title }}</h3>
+          <p class="step-text">{{ st.text }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <!-- ═══ STATIONEN ═══ -->
+  <section class="section timeline-section">
+    <p class="kicker" data-reveal>Stationen</p>
+    <h2 class="section-title" data-reveal>Der Weg <em>hierher</em>.</h2>
+
+    <ol class="timeline">
+      @for (t of timeline; track t.title) {
+        <li class="timeline-entry" data-reveal>
+          <span class="timeline-period">{{ t.period }}</span>
+          <div class="timeline-body">
+            <h3 class="timeline-title">{{ t.title }}</h3>
+            <span class="timeline-place">{{ t.place }}</span>
+            <p class="timeline-text">{{ t.text }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <!-- ═══ KONTAKT ═══ -->
+  <section class="section contact" id="contact">
+    <p class="kicker" data-reveal>Kontakt</p>
+    <h2 class="contact-title" data-reveal>
+      Lass uns <em>reden</em><span class="accent">.</span>
+    </h2>
+    <p class="contact-sub" data-reveal>
+      Neues Projekt, Zusammenarbeit oder einfach eine gute Idee —
+      schreib mir, ich antworte schnell.
+    </p>
+
+    <div class="contact-actions" data-reveal>
+      <a class="contact-mail" [href]="'mailto:' + contact.email">{{ contact.email }}</a>
+      <div class="contact-socials">
+        <a [href]="contact.linkedin" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+        <a [href]="contact.github" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <span>© {{ year }} Martin Lackner</span>
+  <span class="footer-note">Design &amp; Code: eigenhändig.</span>
+</footer>
