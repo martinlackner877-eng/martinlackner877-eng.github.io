@@ -34,6 +34,7 @@ export class HeroSection implements AfterViewInit, OnDestroy {
   private intro?: gsap.core.Timeline;
   private introPlayed = false;
   private destroyed = false;
+  private onPointer?: (e: MouseEvent) => void;
 
   constructor() {
     effect(() => {
@@ -66,9 +67,11 @@ export class HeroSection implements AfterViewInit, OnDestroy {
     // Startzustände — der Preloader verdeckt die Bühne noch
     gsap.set(split.chars, { yPercent: 120 });
     gsap.set('.hero-kicker, .hero-role, .hero-sub, .hero-cue', { opacity: 0 });
+    gsap.set('.hero-figure', { opacity: 0, x: 70 });
 
     // ─── Auftritt ───
     this.intro = gsap.timeline({ paused: true, defaults: { ease: 'expo.out' } })
+      .to('.hero-figure', { opacity: 1, x: 0, duration: 1.4 }, 0.55)
       .to(split.chars, { yPercent: 0, duration: 1.15, stagger: 0.035 }, 0.15)
       .to('.hero-kicker', {
         opacity: 1, duration: 0.9,
@@ -99,7 +102,22 @@ export class HeroSection implements AfterViewInit, OnDestroy {
       .to('.hero-line-a', { xPercent: -14, opacity: 0, ease: 'power1.in' }, 0)
       .to('.hero-line-b', { xPercent: 14, opacity: 0, ease: 'power1.in' }, 0)
       .to('.hero-kicker, .hero-role, .hero-sub, .hero-cue', { opacity: 0, y: -30, ease: 'power1.in' }, 0)
+      .to('.hero-figure', { xPercent: 16, opacity: 0, ease: 'power1.in' }, 0)
       .to('.hero-shade', { opacity: 0.85, ease: 'none' }, 0);
+
+    // ─── Maus-Parallax: die Figur weicht der Maus minimal aus (Tiefe) ───
+    if (this.motion.finePointer) {
+      const img = this.host.nativeElement.querySelector('.hero-figure img') as HTMLElement | null;
+      if (img) {
+        const fx = gsap.quickTo(img, 'x', { duration: 0.9, ease: 'power2.out' });
+        const fy = gsap.quickTo(img, 'y', { duration: 0.9, ease: 'power2.out' });
+        this.onPointer = (e: MouseEvent) => {
+          fx((e.clientX / window.innerWidth - 0.5) * -22);
+          fy((e.clientY / window.innerHeight - 0.5) * -12);
+        };
+        window.addEventListener('mousemove', this.onPointer, { passive: true });
+      }
+    }
   }
 
   onCue(event: Event): void {
@@ -109,6 +127,7 @@ export class HeroSection implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.destroyed = true;
+    if (this.onPointer) window.removeEventListener('mousemove', this.onPointer);
     this.ctx?.revert();
   }
 }
