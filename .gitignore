@@ -41,3 +41,9 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Rohmaterial (Fotos mit GPS/EXIF, Texte im Entwurf) – aufbereitet landet es in public/img und src/app/data
+/inhalte/
+
+# Lokale Claude-Einstellungen
+.claude/settings.local.json
