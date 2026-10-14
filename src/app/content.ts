@@ -56,8 +56,8 @@ const DE: Content = {
   },
   nav: { about: 'Über mich', projects: 'Projekte', research: 'Forschung', cv: 'Werdegang', photos: 'Fotos', contact: 'Kontakt', switchLang: 'EN', switchHref: '/en', modeLight: 'Reinraum-Modus', modeDark: 'Dunkel', skip: 'Zum Inhalt springen' },
   hero: {
-    claim: 'Ich will den Grund wissen.',
-    sub: 'Software und Security für die Halbleiterfertigung, Wirtschaftsinformatik in Klagenfurt, und KI, die ich bis in die Mathematik verstehen will.',
+    claim: 'Erst verstehen. Dann bauen.',
+    sub: 'Ich entwickle Software für Chipfabriken, gestalte Websites und baue an eigener KI. Dabei frage ich so lange warum, bis ich den Grund kenne.',
     ctaProjects: 'Projekte ansehen', ctaContact: 'Kontakt', scroll: 'Scrollen',
     caps: [['Jeder Chip beginnt als ', 'blanke Scheibe', ' Silizium.'], ['Ein Laser prüft ', 'jede Struktur', ', Zeile für Zeile.'], ['Und auf meinem Wafer leuchten ', 'zwei Buchstaben', '.'], ['Daraus ist mein ', 'Zeichen', ' entstanden. Schau nach oben links.']]
   },
@@ -78,8 +78,8 @@ const DE: Content = {
     list: [
       { id: 'etfit', title: 'ET-FIT Drautal', tags: ['design', 'dev'], text: 'Die ganze digitale Seite eines neuen Fitnessstudios mit 1.200 m², von der ersten Zeile bis zur Eröffnung: Website in Angular mit automatischem Deployment, Shop, Datenschutz und Messung, Print und Videos.', meta: '2026', link: { href: 'https://www.et-fit.at', label: 'et-fit.at' }, img: 'img/shot-etfit.webp', alt: 'Startseite von et-fit.at', w: 1600, h: 1000, cursor: 'ET-FIT' },
       { id: 'kompass', title: 'Kompass', tags: ['ai', 'dev'], text: 'Mein Studium an einem Ort: Moodle, Stundenplan, Abgaben, ECTS und Lernkarten der Universität Klagenfurt, sortiert nach dem, was heute zählt. Web und iPhone auf einem gemeinsamen Kern, KI-Agenten mit klaren Freigaben.', meta: 'in Arbeit', link: { href: 'https://kompass.unistuff.workers.dev/', label: 'kompass.unistuff.workers.dev' }, img: 'img/shot-kompass.webp', alt: 'Startseite der App Kompass', w: 1600, h: 1000, cursor: 'Kompass' },
-      { id: 'gateway', title: 'Serial-to-IP-Gateway', tags: ['sec', 'dev'], text: 'Meine Bachelorarbeit, bewertet mit 1,0: Entwicklung eines Serial-to-IP-Gateways für den Reinraumbetrieb in der Halbleiterindustrie. Serielle Anlagen kommen sicher ins Netzwerk, als Windows-Dienst oder als Container direkt auf einer Firewall.', meta: 'Bachelorarbeit, Universität Klagenfurt · Bild: Reinraum, gemeinfrei, Wikimedia Commons', img: 'img/lab-reinraum.webp', alt: 'Reinraum einer Halbleiterfertigung im gelben Licht', w: 1600, h: 1240, cursor: 'Reinraum' },
-      { id: 'pulse', title: 'ET FIT Pulse', tags: ['dev', 'design'], text: 'Eine Show für die Bildschirme im Studio, die das Team selbst pflegt. Auf der Player-Hardware ruckelte sie. Der Grund: ein eingebautes Chromium 69 ohne Grafikbeschleunigung. Jetzt läuft sie flüssig.', meta: '2026', img: 'img/shot-monitor.webp', alt: 'Startbild der Monitor-Show ET FIT Pulse', w: 1600, h: 900, cursor: 'Show' }
+      { id: 'gateway', title: 'Serial-to-IP-Gateway', tags: ['sec', 'dev'], text: 'Meine Bachelorarbeit, bewertet mit 1,0: ein Gateway, das Anlagen im Reinraum der Halbleiterindustrie sicher mit dem Netzwerk verbindet.', meta: 'Bachelorarbeit, Universität Klagenfurt · Bild: Reinraum, gemeinfrei, Wikimedia Commons', img: 'img/lab-reinraum.webp', alt: 'Reinraum einer Halbleiterfertigung im gelben Licht', w: 1600, h: 1240, cursor: 'Reinraum' },
+      { id: 'pulse', title: 'ET FIT Pulse', tags: ['dev', 'design'], text: 'Die Show für die Bildschirme im Studio: Kursplan, Team und aktuelle Ansagen laufen den ganzen Tag in Bewegung. Das Team pflegt alles selbst im Browser, ohne eine Zeile Code.', meta: '2026', img: 'img/shot-monitor.webp', alt: 'Startbild der Monitor-Show ET FIT Pulse', w: 1600, h: 900, cursor: 'Show' }
     ],
     more: [
       { title: 'ETCON', tags: ['dev', 'sec'], text: 'Energiemanagement für Photovoltaik. Als Projektleiter eines Dreierteams verantwortlich für Architektur, Sicherheitskonzept und Frontend. 2022–2023.' },
@@ -180,8 +180,8 @@ const EN: Content = {
   },
   nav: { about: 'About', projects: 'Projects', research: 'Research', cv: 'Career', photos: 'Photos', contact: 'Contact', switchLang: 'DE', switchHref: '/', modeLight: 'Cleanroom mode', modeDark: 'Dark', skip: 'Skip to content' },
   hero: {
-    claim: 'I want to know why.',
-    sub: 'Software and security for semiconductor manufacturing, business informatics in Klagenfurt, and AI I want to understand down to the maths.',
+    claim: 'Understand first. Then build.',
+    sub: 'I write software for chip fabs, design websites and build my own AI. Along the way, I keep asking why until I find the reason.',
     ctaProjects: 'See projects', ctaContact: 'Contact', scroll: 'Scroll',
     caps: [['Every chip starts as a ', 'bare disc', ' of silicon.'], ['A laser checks ', 'every structure', ', line by line.'], ['And on my wafer, ', 'two letters', ' light up.'], ['That became my ', 'mark', '. Look at the top left.']]
   },
@@ -202,8 +202,8 @@ const EN: Content = {
     list: [
       { id: 'etfit', title: 'ET-FIT Drautal', tags: ['design', 'dev'], text: 'The entire digital side of a new 1,200 m² gym, from the first line of code to opening day: an Angular website with automated deployment, shop, privacy and analytics, print and video.', meta: '2026', link: { href: 'https://www.et-fit.at', label: 'et-fit.at' }, img: 'img/shot-etfit.webp', alt: 'Home page of et-fit.at', w: 1600, h: 1000, cursor: 'ET-FIT' },
       { id: 'kompass', title: 'Kompass', tags: ['ai', 'dev'], text: 'My studies in one place: Moodle, timetable, assignments, ECTS and flashcards from the University of Klagenfurt, sorted by what matters today. Web and iPhone on one shared core, AI agents with clear approvals.', meta: 'in progress', link: { href: 'https://kompass.unistuff.workers.dev/', label: 'kompass.unistuff.workers.dev' }, img: 'img/shot-kompass.webp', alt: 'Home page of the Kompass app', w: 1600, h: 1000, cursor: 'Kompass' },
-      { id: 'gateway', title: 'Serial-to-IP Gateway', tags: ['sec', 'dev'], text: 'My bachelor’s thesis, graded 1.0 (the top mark): developing a serial-to-IP gateway for cleanroom operation in the semiconductor industry. Serial equipment gets onto the network securely, as a Windows service or as a container running directly on a firewall.', meta: 'Bachelor’s thesis, University of Klagenfurt · Image: cleanroom, public domain, Wikimedia Commons', img: 'img/lab-reinraum.webp', alt: 'Semiconductor cleanroom in yellow light', w: 1600, h: 1240, cursor: 'Cleanroom' },
-      { id: 'pulse', title: 'ET FIT Pulse', tags: ['dev', 'design'], text: 'A show for the screens in the gym that the team maintains themselves. On the player hardware it stuttered. The reason: a built-in Chromium 69 without GPU acceleration. Now it runs smoothly.', meta: '2026', img: 'img/shot-monitor.webp', alt: 'Start screen of the ET FIT Pulse monitor show', w: 1600, h: 900, cursor: 'Show' }
+      { id: 'gateway', title: 'Serial-to-IP Gateway', tags: ['sec', 'dev'], text: 'My bachelor’s thesis, graded 1.0 (the top mark): a gateway that connects equipment in semiconductor cleanrooms securely to the network.', meta: 'Bachelor’s thesis, University of Klagenfurt · Image: cleanroom, public domain, Wikimedia Commons', img: 'img/lab-reinraum.webp', alt: 'Semiconductor cleanroom in yellow light', w: 1600, h: 1240, cursor: 'Cleanroom' },
+      { id: 'pulse', title: 'ET FIT Pulse', tags: ['dev', 'design'], text: 'The show for the screens in the gym: class schedule, team and current announcements keep moving all day. The staff update everything themselves in the browser, without a single line of code.', meta: '2026', img: 'img/shot-monitor.webp', alt: 'Start screen of the ET FIT Pulse monitor show', w: 1600, h: 900, cursor: 'Show' }
     ],
     more: [
       { title: 'ETCON', tags: ['dev', 'sec'], text: 'Energy management for photovoltaics. As project lead of a team of three, responsible for architecture, security concept and front end. 2022–2023.' },
