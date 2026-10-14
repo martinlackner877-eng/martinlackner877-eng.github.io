@@ -61,3 +61,17 @@ Vorlage: `etfit/src/app/pages/portfolio/portfolio.ts` (Nachbarordner `Desktop\et
 `Desktop\et-fit Drautal\` – `etfit` (Kundenwebsite, dort lebt bis zum Umzug noch `/dev`), `et-fit-pulse`,
 `et-fit-marke` (Betriebshandbuch). Nach dem Umzug: `/dev` auf et-fit.at per 301 hierher umleiten,
 Footer-Link dort anpassen, Route `portfolio` in etfit entfernen.
+
+## Konzept „Der Wafer“ (entschieden 14.10.2026)
+
+- Leitidee: Das Leben als **Prozessroute eines Wafers** durch die Fab. Rohling → Lithografie → Dotierung →
+  Passivierung → Verdrahtung → Integration → Wafertest → Burn-in → Auslieferung. Projekte sind Chips auf der
+  Wafermap, Klassen = Design / Development / Security & Systems / AI & Data. Kontakt = Auslieferung.
+- Hero: echter 3D-Wafer (three.js, `MeshPhysicalMaterial` mit Iridescence, Studio-Environment aus Lichtleisten,
+  orange Kante), reagiert auf Maus und Scroll. three.js nur nachladen; schwache Geräte, `prefers-reduced-motion`
+  und Fehler → Standbild.
+- Look: dunkel als Standard, heller „Reinraum-Modus“ umschaltbar. Farben `#0B0C0E` `#16181C` `#C2C8CF`
+  `#ECEEF1`, Akzent nur `#ED440D`. Überschriften Archivo (breiter Schnitt), lokal einbinden.
+- Logo: Wafer-Stempel, 11×11-Chipraster, 20 Chips bilden „ML“, Kerbe orange.
+- Halbleiter-Inhalte nur allgemein (siehe Regel 2). Laborfotos aus offenen Archiven immer mit Nachweis.
+- Plan mit persönlichen Details: `inhalte/plan.md` (lokal).

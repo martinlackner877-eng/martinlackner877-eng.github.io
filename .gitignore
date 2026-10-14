@@ -47,3 +47,6 @@ Thumbs.db
 
 # Lokale Claude-Einstellungen
 .claude/settings.local.json
+
+# Arbeitsdateien des Design-Skills (Richtungsblatt, Inspektor-Screenshots)
+/.taste-skill/
