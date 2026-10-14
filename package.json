@@ -5,7 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "postbuild": "node -e \"require('fs').copyFileSync('dist/portfolio/browser/index.html','dist/portfolio/browser/404.html')\"",
+    "postbuild": "node -e \"const fs=require('fs'),d='dist/portfolio/browser/';fs.copyFileSync(d+'index.html',d+'404.html');fs.mkdirSync(d+'en',{recursive:true});fs.copyFileSync(d+'index.html',d+'en/index.html')\"",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
