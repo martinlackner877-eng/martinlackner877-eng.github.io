@@ -52,6 +52,7 @@
               }
             ],
             "styles": [
+              "@fontsource-variable/archivo/wdth.css",
               "src/styles.scss"
             ]
           },

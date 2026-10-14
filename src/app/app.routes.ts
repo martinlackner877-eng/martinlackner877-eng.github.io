@@ -1,14 +1,7 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  {
-    path: '',
-    loadComponent: () => import('./features/home/home-page').then((m) => m.HomePage),
-    title: 'Martin Lackner — Security × Code × AI × Design'
-  },
-  {
-    path: 'work/:slug',
-    loadComponent: () => import('./features/project/project-page').then((m) => m.ProjectPage)
-  },
+  { path: '', loadComponent: () => import('./home/home-page').then((m) => m.HomePage), data: { lang: 'de' } },
+  { path: 'en', loadComponent: () => import('./home/home-page').then((m) => m.HomePage), data: { lang: 'en' } },
   { path: '**', redirectTo: '' }
 ];

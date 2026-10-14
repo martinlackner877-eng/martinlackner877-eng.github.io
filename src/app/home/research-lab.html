@@ -1,0 +1,57 @@
+<p class="state reveal">{{ c().statement[0] }}<span class="glitch" [attr.data-text]="c().statement[1]">{{ c().statement[1] }}</span>{{ c().statement[2] }}<span class="glitch" [attr.data-text]="c().statement[3]">{{ c().statement[3] }}</span>{{ c().statement[4] }}</p>
+
+<div class="lab" [attr.data-cursor]="c().netCursor">
+  <canvas #net role="img" [attr.aria-label]="c().netLabel"></canvas>
+  <div class="hud" data-ui>
+    <span><b>{{ nodeCount }}</b> {{ c().hud[0] }}</span><span><b>{{ edgeCount() }}</b> {{ c().hud[1] }}</span><span><b>{{ passes() }}</b> {{ c().hud[2] }}</span><span><b>{{ learned() }}</b> {{ c().hud[3] }}</span>
+  </div>
+  <p class="labnote">{{ c().labNote }}</p>
+</div>
+
+<div class="exps">
+  <article class="exp reveal" aria-labelledby="nt-h">
+    <h3 id="nt-h">{{ c().nt.title }}</h3>
+    <p class="ex">{{ c().nt.intro }}</p>
+    <p class="prompt" aria-live="polite">{{ c().nt.words.base }}@for (w of words(); track $index) {<span class="new">{{ spaced(w) }}</span>}<span class="caret" aria-hidden="true"></span></p>
+    <div class="ntbars">
+      @for (b of probs(); track b.w; let i = $index) {
+        <div class="ntbar" [class.top]="b.top" [class.pick]="pick() === i"><span>{{ b.w }}</span><div class="tr"><div class="fl" [style.width.%]="b.p * 100"></div></div><span class="pc">{{ pct(b.p) }}</span></div>
+      }
+    </div>
+    <div class="ctl">
+      <label for="nt-t">{{ c().nt.temp }} <output>{{ tempLabel() }}</output></label>
+      <input type="range" id="nt-t" min="0.1" max="2" step="0.05" [value]="temp()" (input)="setTemp($event)" />
+    </div>
+    <div class="row">
+      <button class="btn" appMagnetic type="button" (click)="draw()" [disabled]="done()">{{ done() ? c().nt.done : c().nt.go }}</button>
+      <button class="ghost" type="button" (click)="reset()">{{ c().nt.reset }}</button>
+    </div>
+    <p class="small">{{ c().nt.note }}</p>
+  </article>
+
+  <article class="exp reveal" aria-labelledby="at-h">
+    <h3 id="at-h">{{ c().att.title }}</h3>
+    <p class="ex">{{ c().att.intro }}</p>
+    <label class="sr" for="at-in">{{ c().att.inputLabel }}</label>
+    <input id="at-in" [value]="sentence()" (input)="setSentence($event)" maxlength="80" autocomplete="off" spellcheck="false" />
+    <div class="att" role="img" [attr.aria-label]="c().att.matrixLabel" [style.grid-template-columns]="'minmax(70px, auto) repeat(' + toks().length + ', minmax(14px, 1fr))'" (pointerleave)="focus.set(-1)">
+      <span></span>
+      @for (tk of toks(); track $index; let j = $index) { <span class="hd ch" [class.on]="best() === j">{{ tk }}</span> }
+      @for (row of att(); track $index; let i = $index) {
+        <span class="hd rh" tabindex="0" [class.on]="focus() === i" (pointerenter)="focus.set(i)" (focus)="focus.set(i)">{{ toks()[i] }}</span>
+        @for (v of row; track $index; let j = $index) {
+          <span class="cell" [style.opacity]="cellOpacity(v)" [class.dim]="focus() >= 0 && focus() !== i" [class.hot]="focus() === i && best() === j" (pointerenter)="focus.set(i)"></span>
+        }
+      }
+    </div>
+    <p class="small" aria-live="polite">{{ reading() }}</p>
+    <p class="small">{{ c().att.note }}</p>
+  </article>
+</div>
+
+<div class="grid4 reveal">
+  @for (tp of c().topics; track tp.title) {
+    <div [style.--c]="'var(--c-' + tp.d + ')'"><h3>{{ tp.title }}</h3><p>{{ tp.text }}</p></div>
+  }
+</div>
+<p class="goal reveal"><b>{{ c().goalLead }}</b> {{ c().goal }}</p>

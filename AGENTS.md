@@ -5,8 +5,14 @@ Repo `martinlackner877-eng/martinlackner877-eng.github.io` – **öffentlich** (
 
 ## Stack und Deploy
 
-- Angular 21 (Standalone, OnPush), SCSS, GSAP. Eine Startseite plus Projekt-Detailseiten (`features/project`).
-- Inhalte: `src/app/data/portfolio.data.ts` (Texte, Stationen, Projekte, Fotos, Links). Keine Datenbank.
+- Angular 21 (Standalone, OnPush, zoneless), SCSS, GSAP ScrollTrigger, three.js (nachgeladen).
+- Eine Seite in zwei Sprachen: `/` Deutsch, `/en` Englisch (Route-Daten `lang`).
+- **Alle Texte und Fakten: `src/app/content.ts`** (DE und EN nebeneinander). Keine Datenbank.
+- Bausteine in `src/app/home/`: `home-page` (Abschnitte, Scroll-Geschichte, Effekte), `wafer-stage` (3D-Wafer),
+  `research-lab` (Netz, nächstes Wort, Attention), `photo-wafer` (Galerie + Lightbox), `contact-form`, `logo`, `fx.ts`.
+  Gemeinsamer Zustand Seite ↔ Wafer: `core/wafer-bus.ts`. Tokens und Grundstile: `src/styles.scss`.
+- Schrift Archivo lokal über `@fontsource-variable/archivo` (Breitenachse), keine Google-Dienste.
+- Favicon und Link-Vorschau: `public/favicon.svg|ico`, `apple-touch-icon.png`, `og-image.jpg` (aus dem Wafer-Logo bzw. Hero).
 - **Push auf `main` = sofort live**: `.github/workflows/deploy.yml` baut und veröffentlicht auf GitHub Pages.
 - `npm run build` → `dist/portfolio/browser`; `postbuild` kopiert `index.html` nach `404.html` (SPA-Fallback auf Pages).
 - Abhängigkeiten mit `npm install`, nie `npm ci` (Lockfile entsteht auf Windows, siehe Workflow-Kommentar).
@@ -21,7 +27,7 @@ Repo `martinlackner877-eng/martinlackner877-eng.github.io` – **öffentlich** (
 ## Fotos und Rohinhalte
 
 - Martin legt Originale in `inhalte/fotos/`, Antworten in `inhalte/steckbrief.md`. `inhalte/` ist gitignored.
-- `tools/fotos.mjs` schreibt `public/img/<name>.webp`: max. 2000 px, WebP q82, **ohne EXIF/GPS**. HEIC wird abgelehnt.
+- `tools/fotos.mjs` schreibt `public/img/<name>.webp` (max. 2000 px, WebP q82) und `<name>-s.webp` (480 px, Vorschau), **ohne EXIF/GPS**. HEIC wird abgelehnt.
 - Im Code nur die aufbereiteten `img/*.webp` verwenden, nie Originale nach `public/` legen.
 
 ## Kontaktformular (muss so bleiben, wie es auf et-fit.at/dev funktioniert)

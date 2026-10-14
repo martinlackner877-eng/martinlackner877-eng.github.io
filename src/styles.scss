@@ -1,195 +1,51 @@
 // ============================================================
-// MARTIN LACKNER — PORTFOLIO v2
-// Direction: "NEURAL VOID"
-//   - Deep-Space-Dunkel, Elektrik-Violett + Cyan als Signal-
-//     farben. Große Grotesk-Typografie (Space Grotesk), Mono-
-//     Labels (JetBrains Mono). Glas-Panels, Glow, Partikel.
-//   - Motion = Erzählung: Scroll ist die Timeline der Story.
-// Diese Datei ist die EINE Quelle der Wahrheit für Tokens.
+// MARTIN LACKNER · Konzept „Der Wafer“
+// Dunkel als Standard, heller „Reinraum-Modus“ über data-mode="light".
+// Farben aus Martins Profil, Orange #ED440D als einziger Akzent.
+// Diese Datei ist die eine Quelle für Tokens und Grundstile.
 // ============================================================
 
 :root {
-  // ─── Farben ───
-  --bg:           #050508;                        // Void — fast schwarz, violetter Stich
-  --bg-2:         #0a0a12;                        // erhöhte Sektion
-  --surface:      #0d0d17;                        // Karten / Panels
-  --glass:        rgba(124, 108, 255, 0.05);      // Glas-Fläche
-  --line:         rgba(163, 155, 255, 0.10);      // Hairline
-  --line-strong:  rgba(163, 155, 255, 0.24);
-  --text:         #ecebff;                        // kühles Weiß mit Violett-Hauch
-  --muted:        #8f8ca6;
-  --faint:        #4a4860;
-  --violet:       #7c6cff;                        // Elektrik-Violett — Primärsignal
-  --cyan:         #4ee1c9;                        // Cyan — Sekundärsignal
-  --violet-soft:  rgba(124, 108, 255, 0.14);
-  --violet-glow:  rgba(124, 108, 255, 0.38);
-  --cyan-soft:    rgba(78, 225, 201, 0.12);
-  --cyan-glow:    rgba(78, 225, 201, 0.35);
-
-  // ─── Typografie ───
-  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
-  --font-body:    'Inter', -apple-system, sans-serif;
-  --font-mono:    'JetBrains Mono', ui-monospace, monospace;
-
-  --fs-hero:  clamp(3rem, 10vw, 9.5rem);
-  --fs-h2:    clamp(2.1rem, 5.4vw, 4.6rem);
-  --fs-h3:    clamp(1.3rem, 2.4vw, 1.9rem);
-
-  // ─── Rhythmus ───
-  --pad-x: clamp(1.4rem, 5vw, 6rem);
-  --section-gap: clamp(7rem, 16vh, 13rem);
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --bg: #0B0C0E; --bg-2: #101215; --surface: #16181C; --die: #1c2026;
+  --ink: #ECEEF1; --muted: #9aa2ab; --platin: #C2C8CF;
+  --accent: #ED440D; --accent-ink: #0B0C0E;
+  --c-design: #ED440D; --c-dev: #C2C8CF; --c-sec: #6f93c8; --c-ai: #ECEEF1;
+  --font: "Archivo Variable", "Helvetica Neue", Arial, sans-serif;
+  --step-body: clamp(1.0625rem, 1rem + .25vw, 1.1875rem);
+  --m: clamp(20px, 4vw, 56px);
+  color-scheme: dark;
+}
+:root[data-mode="light"] {
+  --bg: #ECEEF1; --bg-2: #e3e6ea; --surface: #ffffff; --die: #d5d9de;
+  --ink: #0B0C0E; --muted: #4f5660; --platin: #5d646d; --accent-ink: #ffffff;
+  --c-dev: #6b737c; --c-ai: #16181C; --c-sec: #3c5f92;
+  color-scheme: light;
 }
 
-*,
-*::before,
-*::after { box-sizing: border-box; }
-
-html {
-  // Kein natives smooth-scroll: ScrollSmoother übernimmt die Regie.
-  scroll-behavior: auto;
-  // Muss zusätzlich zu body gesetzt sein: mobile Browser expandieren
-  // sonst den Layout-Viewport um seitlich rausragende Deko.
-  overflow-x: clip;
-}
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-body);
-  font-weight: 300;
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  // clip statt hidden: clippt seitlich rausragende Deko (Nebel), ohne
-  // einen Scroll-Container zu erzeugen — sonst expandiert der mobile
-  // Layout-Viewport und fixed-Elemente (Nav) binden sich daran.
-  overflow-x: clip;
-}
-
-// Die gescrollte Bühne selbst darf horizontal nie Overflow beitragen.
-#smooth-content {
-  overflow-x: clip;
-}
-
-::selection {
-  background: var(--violet);
-  color: #0a0817;
-}
-
-// Dezente, dunkle Scrollbar (Chromium/WebKit)
-::-webkit-scrollbar { width: 10px; }
-::-webkit-scrollbar-track { background: var(--bg); }
-::-webkit-scrollbar-thumb {
-  background: #232236;
-  border-radius: 5px;
-  &:hover { background: #35334f; }
-}
-
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--bg); overflow-x: clip; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 var(--step-body)/1.55 var(--font); transition: background-color .5s ease, color .5s ease; -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
+img { display: block; max-width: 100%; }
+p { margin: 0; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--accent); color: var(--accent-ink); }
+h1, h2, h3 { margin: 0; font-stretch: 125%; font-weight: 750; text-transform: uppercase; letter-spacing: -0.02em; line-height: .92; text-wrap: balance; }
+h3 { font-size: clamp(22px, 1.8vw, 30px); line-height: 1; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-:focus-visible {
-  outline: 1px solid var(--cyan);
-  outline-offset: 3px;
-}
+.btn { display: inline-flex; align-items: center; min-height: 54px; padding: 0 28px; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font: 600 16px/1 var(--font); text-decoration: none; border: 0; cursor: pointer; transition: background-color .2s ease; }
+.btn:hover { background: var(--ink); color: var(--bg); }
+.btn:disabled { opacity: .45; cursor: default; }
 
-// ============================================================
-// Geteilte Bausteine der Story-Sektionen
-// ============================================================
+// Einblenden: Kinder steigen auf, sobald der Block sichtbar ist (ohne JS sofort sichtbar)
+.reveal > * { transition: opacity .8s ease, transform .8s ease; }
+html.js .reveal:not(.in) > * { opacity: 0; transform: translateY(26px); }
+.reveal > *:nth-child(2) { transition-delay: .08s; }
+.reveal > *:nth-child(3) { transition-delay: .16s; }
+.reveal > *:nth-child(4) { transition-delay: .24s; }
 
-.section {
-  position: relative;
-  padding: calc(var(--section-gap) / 2) var(--pad-x);
-  max-width: 90rem;
-  margin: 0 auto;
-}
-
-// Kapitel-Marker: „01 / WER" — mono, decodiert sich beim Erreichen
-.kicker {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.34em;
-  text-transform: uppercase;
-  color: var(--cyan);
-  margin: 0 0 1.6rem;
-
-  &::before {
-    content: '';
-    display: inline-block;
-    width: 2.2rem;
-    height: 1px;
-    background: var(--cyan-glow);
-    vertical-align: middle;
-    margin-right: 0.9rem;
-  }
-}
-
-.section-title {
-  font-family: var(--font-display);
-  font-size: var(--fs-h2);
-  font-weight: 600;
-  line-height: 1.04;
-  letter-spacing: -0.02em;
-  margin: 0 0 3.5rem;
-
-  em {
-    font-style: normal;
-    color: transparent;
-    background: linear-gradient(120deg, var(--violet), var(--cyan));
-    background-clip: text;
-    -webkit-background-clip: text;
-  }
-}
-
-// Glas-Panel
-.panel {
-  background: var(--glass);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  backdrop-filter: blur(6px);
-}
-
-// Mono-Chip (Skills, Tags)
-.chip {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  color: var(--muted);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.32rem 0.85rem;
-  white-space: nowrap;
-}
-
-// background-clip:text am <em> bricht, sobald SplitText den Inhalt in
-// transformierte Char-Spans zerlegt — die Chars innerhalb von <em>
-// bekommen den Verlauf deshalb einzeln. (Global, weil GSAP die Spans
-// dynamisch erzeugt und Component-Styles sie nicht matchen.)
-em .tr-char {
-  background: linear-gradient(120deg, var(--violet), var(--cyan));
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-}
-
-// Radialer Hintergrund-Nebel (Violett/Cyan), pro Sektion positionierbar
-.nebula {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  pointer-events: none;
-  z-index: -1;
-
-  &.nebula-violet { background: radial-gradient(circle, var(--violet-soft), transparent 70%); }
-  &.nebula-cyan   { background: radial-gradient(circle, var(--cyan-soft), transparent 70%); }
-}
-
-// Auf Touch-Geräten: nativen Cursor behalten, auf feinen Pointern
-// übernimmt der Custom Cursor (Klasse setzt die Shell).
-body.has-custom-cursor,
-body.has-custom-cursor a,
-body.has-custom-cursor button {
-  cursor: none;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  html.js .reveal:not(.in) > * { opacity: 1; transform: none; }
 }

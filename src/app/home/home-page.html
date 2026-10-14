@@ -1,0 +1,128 @@
+<a class="skip" href="#ueber" (click)="go('ueber', $event)">{{ c.nav.skip }}</a>
+<app-wafer-stage />
+<div class="cur" aria-hidden="true"></div>
+
+<header class="bar" [class.solid]="solidBar()">
+  <a class="wm" href="#top" (click)="go('top', $event)" aria-label="Martin Lackner"><app-logo /><span>Martin Lackner</span></a>
+  <nav [attr.aria-label]="c.nav.about">
+    <a href="#ueber" (click)="go('ueber', $event)">{{ c.nav.about }}</a>
+    <a href="#projekte" (click)="go('projekte', $event)">{{ c.nav.projects }}</a>
+    <a href="#forschung" (click)="go('forschung', $event)">{{ c.nav.research }}</a>
+    <a href="#werdegang" (click)="go('werdegang', $event)">{{ c.nav.cv }}</a>
+    <a href="#fotos" (click)="go('fotos', $event)">{{ c.nav.photos }}</a>
+    <a href="#kontakt" (click)="go('kontakt', $event)">{{ c.nav.contact }}</a>
+  </nav>
+  <div class="tools">
+    <a class="lang" [routerLink]="c.nav.switchHref" [attr.hreflang]="lang === 'de' ? 'en' : 'de'">{{ c.nav.switchLang }}</a>
+    <button class="mode" type="button" [attr.aria-pressed]="mode() === 'light'" (click)="toggleMode()">{{ mode() === 'light' ? c.nav.modeDark : c.nav.modeLight }}</button>
+  </div>
+</header>
+
+<main>
+  <section class="intro" id="top" [attr.aria-label]="'Martin Lackner'">
+    <div class="pin">
+      <div class="h-copy">
+        <h1 id="name" aria-label="Martin Lackner">
+          @for (line of nameLines; track line) {
+            <span class="nl" aria-hidden="true">@for (ch of line.split(''); track $index) {<span class="ch">{{ ch }}</span>}</span>
+          }
+        </h1>
+        <p class="lead" id="claim">{{ c.hero.claim }}</p>
+        <p class="sub">{{ c.hero.sub }}</p>
+        <div class="acts">
+          <a class="btn" appMagnetic href="#projekte" (click)="go('projekte', $event)">{{ c.hero.ctaProjects }}</a>
+          <a href="#kontakt" (click)="go('kontakt', $event)">{{ c.hero.ctaContact }}</a>
+        </div>
+      </div>
+      @for (cap of c.hero.caps; track $index; let i = $index) {
+        <p class="cap" [id]="'cap' + i" aria-hidden="true">{{ cap[0] }}<b>{{ cap[1] }}</b>{{ cap[2] }}</p>
+      }
+      <div class="scrollhint" aria-hidden="true"><span>{{ c.hero.scroll }}</span><i></i></div>
+    </div>
+  </section>
+
+  <div class="solid-sec" id="content">
+    <section class="sec" id="ueber" aria-labelledby="h-ueber">
+      <h2 id="h-ueber" class="scr">{{ c.about.title }}</h2>
+      <div class="about reveal">
+        <div>
+          <div class="txt">
+            @for (p of c.about.paras; track $index) { <p>{{ p }}</p> }
+          </div>
+          <div class="facts">
+            @for (f of c.about.facts; track f.label) {
+              <div><b [attr.data-count]="f.value" [attr.data-dec]="f.dec" [attr.data-unit]="f.unit">{{ f.value.toLocaleString(locale, { minimumFractionDigits: f.dec, maximumFractionDigits: f.dec }) }}{{ f.unit }}</b><span>{{ f.label }}</span></div>
+            }
+          </div>
+        </div>
+        <figure [attr.data-cursor]="lang === 'de' ? 'Berg' : 'Summit'"><img id="portrait" src="img/gipfel-sitzend.webp" [alt]="c.about.portraitAlt" width="1086" height="1448" loading="lazy" /></figure>
+      </div>
+    </section>
+
+    <section class="sec alt" id="projekte" aria-labelledby="h-proj">
+      <h2 id="h-proj" class="scr">{{ c.projects.title }}</h2>
+      @for (p of c.projects.list; track p.id) {
+        <article class="proj">
+          <div class="shot" appTilt [tiltMax]="5" [attr.data-cursor]="p.cursor"><img [src]="p.img" [alt]="p.alt" [width]="p.w" [height]="p.h" loading="lazy" /><span class="expo"></span></div>
+          <div class="reveal">
+            <div class="tags">@for (t of p.tags; track t) { <span [style.--c]="'var(--c-' + t + ')'">{{ c.disciplines[t] }}</span> }</div>
+            <h3>{{ p.title }}</h3>
+            <p>{{ p.text }}</p>
+            <p class="meta">{{ p.meta }}@if (p.link) { · <a [href]="p.link.href" target="_blank" rel="noopener">{{ p.link.label }}</a> }</p>
+          </div>
+        </article>
+      }
+      <div class="more reveal">
+        @for (m of c.projects.more; track m.title) {
+          <div><div class="tags">@for (t of m.tags; track t) { <span [style.--c]="'var(--c-' + t + ')'">{{ c.disciplines[t] }}</span> }</div><h3>{{ m.title }}</h3><p>{{ m.text }}</p></div>
+        }
+      </div>
+    </section>
+
+    <section class="sec research" id="forschung" aria-labelledby="h-fo">
+      <h2 id="h-fo" class="scr">{{ c.research.title }}</h2>
+      <app-research-lab [c]="c.research" (toast)="toast($event)" />
+    </section>
+
+    <section class="sec alt cv" id="werdegang" aria-labelledby="h-cv">
+      <h2 id="h-cv" class="scr">{{ c.cv.title }}</h2>
+      <div class="track" id="track">
+        <div class="line" aria-hidden="true"><i id="lineFill"></i></div>
+        <ol>
+          @for (s of c.cv.list; track s.org) {
+            <li><span class="y">{{ s.years }}</span><span><b>{{ s.org }}</b><small>{{ s.role }}</small></span><span class="fab" [title]="s.stepInfo">{{ c.cv.stepWord }} <i>{{ s.step }}</i></span></li>
+          }
+        </ol>
+      </div>
+      <p class="note">{{ c.cv.note }}</p>
+    </section>
+
+    <section class="sec fw" id="fotos" aria-labelledby="h-fw">
+      <h2 id="h-fw" class="scr">{{ c.photos.title }}</h2>
+      <p class="lead reveal">{{ c.photos.lead }}</p>
+      <app-photo-wafer [c]="c.photos" />
+    </section>
+  </div>
+
+  <section class="contact" id="kontakt" aria-labelledby="h-k">
+    <app-contact-form [c]="c.contact" [theme]="turnstileTheme()" (shipped)="shipped()" />
+  </section>
+</main>
+
+<footer class="foot">
+  <span>© {{ year }} Martin Lackner · {{ c.footer.place }}</span>
+  <button type="button" class="linkbtn" (click)="openLegal()">{{ c.footer.legal }}</button>
+  <a [routerLink]="c.nav.switchHref">{{ lang === 'de' ? 'English' : 'Deutsch' }}</a>
+</footer>
+
+<dialog #legal class="legal" aria-labelledby="h-legal">
+  <h2 id="h-legal">{{ c.legal.title }}</h2>
+  <h3>{{ c.legal.imprintTitle }}</h3>
+  @for (p of c.legal.imprint; track $index) { <p>{{ p }}</p> }
+  <h3>{{ c.legal.privacyTitle }}</h3>
+  @for (p of c.legal.privacy; track $index) { <p>{{ p }}</p> }
+  <p class="small">{{ c.legal.credits }}</p>
+  <button type="button" class="btn" (click)="closeLegal()">{{ c.legal.close }}</button>
+</dialog>
+
+<div class="toast" [class.on]="toastOn()" role="status" aria-live="polite">{{ toastText() }}</div>

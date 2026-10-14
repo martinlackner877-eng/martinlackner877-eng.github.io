@@ -9,6 +9,7 @@
 //     verraten sonst Standorte, im schlimmsten Fall das eigene Zuhause
 //   - Dateiname wird web-tauglich (klein, ohne Leer- und Sonderzeichen)
 //   - Hochkant-Fotos vom Handy werden richtig gedreht
+//   - dazu eine kleine Fassung <name>-s.webp (480 px) für Vorschauen, z. B. die Chips der Foto-Galerie
 // Bereits aufbereitete Fotos werden übersprungen (--neu erzwingt alles).
 //
 // iPhone-Fotos im HEIC-Format kann das Werkzeug nicht lesen: als JPG
@@ -38,8 +39,8 @@ for (const datei of readdirSync(EIN).sort()) {
   const von = path.join(EIN, datei);
   if (!statSync(von).isFile() || datei.startsWith('.')) continue;
   if (/\.hei[cf]$/i.test(datei)) { console.warn(`  ✗ ${datei}: HEIC – bitte als JPG exportieren`); continue; }
-  const nach = path.join(AUS, webName(datei));
-  if (!alleNeu && existsSync(nach)) continue;
+  const nach = path.join(AUS, webName(datei)), klein = nach.replace(/\.webp$/, '-s.webp');
+  if (!alleNeu && existsSync(nach) && existsSync(klein)) continue;
   try {
     const meta = await sharp(von).metadata();
     const hatteGps = !!meta.exif && meta.exif.includes(Buffer.from('GPS'));
@@ -47,6 +48,7 @@ for (const datei of readdirSync(EIN).sort()) {
       .resize({ width: 2000, height: 2000, fit: 'inside', withoutEnlargement: true })
       .webp({ quality: 82 })
       .toFile(nach);                                // sharp schreibt ohne .withMetadata() keine Metadaten
+    await sharp(von).rotate().resize({ width: 480, height: 480, fit: 'outside', withoutEnlargement: true }).webp({ quality: 74 }).toFile(klein);
     const kb = Math.round(statSync(nach).size / 1024);
     console.log(`  ✓ ${datei} → img/${path.basename(nach)} (${kb} KB)${hatteGps ? '  · GPS entfernt' : ''}`);
     neu++;
