@@ -30,9 +30,9 @@ Repo `martinlackner877-eng/martinlackner877-eng.github.io` – **öffentlich** (
 - `tools/fotos.mjs` schreibt `public/img/<name>.webp` (max. 2000 px, WebP q82) und `<name>-s.webp` (480 px, Vorschau), **ohne EXIF/GPS**. HEIC wird abgelehnt.
 - Im Code nur die aufbereiteten `img/*.webp` verwenden, nie Originale nach `public/` legen.
 
-## Kontaktformular (muss so bleiben, wie es auf et-fit.at/dev funktioniert)
+## Kontaktformular (übernommen von der alten Seite et-fit.at/dev)
 
-Vorlage: `etfit/src/app/pages/portfolio/portfolio.ts` (Nachbarordner `Desktop\et-fit Drautal\etfit`).
+Alte Vorlage nur noch in der Git-Historie von `etfit` (`src/app/pages/portfolio/portfolio.ts`, gelöscht 14.10.2026).
 - `POST https://www.et-fit.at/mail-dev.php` als JSON: `name`, `email`, `message`, `cf-turnstile-response`.
 - Felder: Name ≥ 2, E-Mail, Nachricht ≥ 10 Zeichen, Honeypot `bot-field` (gefüllt → still verwerfen).
 - Cloudflare Turnstile, Site-Key `0x4AAAAAADt2dBu0Bm_syblC` (Widget „/dev“), Paket `ngx-turnstile`.
@@ -64,9 +64,8 @@ Vorlage: `etfit/src/app/pages/portfolio/portfolio.ts` (Nachbarordner `Desktop\et
 
 ## Verwandte Repos
 
-`Desktop\et-fit Drautal\` – `etfit` (Kundenwebsite, dort lebt bis zum Umzug noch `/dev`), `et-fit-pulse`,
-`et-fit-marke` (Betriebshandbuch). Nach dem Umzug: `/dev` auf et-fit.at per 301 hierher umleiten,
-Footer-Link dort anpassen, Route `portfolio` in etfit entfernen.
+`Desktop\et-fit Drautal\` – `etfit` (Kundenwebsite; `et-fit.at/dev` leitet per 301 in deren `.htaccess` hierher,
+der Footer-Link „by Martin Lackner“ zeigt ebenfalls hierher), `et-fit-pulse`, `et-fit-marke` (Betriebshandbuch).
 
 ## Konzept „Der Wafer“ (entschieden 14.10.2026)
 
